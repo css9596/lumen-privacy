@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>개인정보처리방침 — Lumen</title>
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --teal: #3ECFCF;
+      --text: #1A1A2E;
+      --sub: #555570;
+      --bg: #F5F5FF;
+      --card: #ffffff;
+      --border: #E8E8F0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      padding: 48px 24px 40px;
+      text-align: center;
+      color: white;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .logo-name {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      opacity: 0.85;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .update-date {
+      font-size: 13px;
+      color: var(--sub);
+      margin-bottom: 32px;
+      padding: 10px 16px;
+      background: var(--card);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: inline-block;
+    }
+
+    section {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--primary), var(--teal));
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    p { color: var(--sub); margin-bottom: 10px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      padding-left: 18px;
+      color: var(--sub);
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    ul li:last-child { margin-bottom: 0; }
+
+    .highlight {
+      background: linear-gradient(135deg, #F0EEFF, #E6FAFA);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 12px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .highlight p {
+      color: var(--text);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      border-radius: 16px;
+      padding: 28px;
+      color: white;
+      margin-top: 8px;
+    }
+
+    .contact-box h2 {
+      color: white;
+    }
+
+    .contact-box h2::before {
+      background: white;
+    }
+
+    .contact-box p { color: rgba(255,255,255,0.85); }
+
+    .contact-box a {
+      color: white;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      color: var(--sub);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">☀️</div>
+    <span class="logo-name">Lumen</span>
+  </div>
+  <h1 style="font-size:22px; font-weight:800; margin-bottom:8px;">개인정보처리방침</h1>
+  <p>Privacy Policy</p>
+</header>
+
+<main>
+  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 4월 18일</div>
+
+  <section>
+    <h2>서비스 소개</h2>
+    <p>
+      Lumen(이하 "앱")은 사용자의 캘린더 데이터를 분석하여 매일 아침 맞춤 하루 브리핑을 제공하는
+      Android 애플리케이션입니다. 개발자 최성식(이하 "개발자")은 사용자의 개인정보를 소중히
+      여기며 본 방침에 따라 처리합니다.
+    </p>
+    <div class="highlight">
+      <p>📱 캘린더 데이터는 사용자의 기기 안에서만 처리되며, 외부 서버에 저장되지 않습니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>수집하는 정보</h2>
+    <p>앱은 아래 정보에 접근합니다.</p>
+    <ul>
+      <li>
+        <strong>캘린더 데이터</strong> — 일정 제목, 시작/종료 시간, 참석자 이메일 주소.
+        분석 목적으로만 사용되며 외부로 전송되지 않습니다.
+      </li>
+      <li>
+        <strong>Google 계정 정보</strong> (Google 캘린더 연결 시) — 이름, 이메일, 프로필 사진.
+        화면에 표시하는 용도로만 사용됩니다.
+      </li>
+      <li>
+        <strong>앱 설정</strong> — 알림 시간, 선택한 캘린더 목록 등.
+        기기 로컬 저장소(SharedPreferences)에만 저장됩니다.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>정보 사용 목적</h2>
+    <ul>
+      <li>오늘의 일정 요약 및 집중 시간 분석</li>
+      <li>관계 인사이트 (오래 연락하지 못한 사람 안내)</li>
+      <li>이번 주 업무·개인 시간 비율 계산</li>
+      <li>AI 브리핑 생성을 위한 Anthropic API 요청</li>
+    </ul>
+    <div class="highlight">
+      <p>
+        🤖 AI 브리핑 생성 시 일정 <strong>제목과 시간만</strong> Anthropic API로 전송됩니다.
+        참석자 이메일 등 개인 식별 정보는 전송되지 않습니다.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>제3자 제공 및 외부 서비스</h2>
+    <ul>
+      <li>
+        <strong>Anthropic API</strong> — AI 브리핑 생성에 사용됩니다.
+        일정 제목·시간만 전송되며, Anthropic의
+        <a href="https://www.anthropic.com/privacy" target="_blank" style="color:var(--primary);">개인정보처리방침</a>을 따릅니다.
+      </li>
+      <li>
+        <strong>Google Calendar API</strong> (Google 캘린더 연결 시) —
+        Google의 <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--primary);">개인정보처리방침</a>을 따릅니다.
+      </li>
+    </ul>
+    <p style="margin-top:12px;">
+      앱은 광고 SDK, 분석 SDK, 제3자 마케팅 서비스를 포함하지 않습니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>데이터 보관 및 삭제</h2>
+    <ul>
+      <li>모든 데이터는 기기 내 로컬 저장소에만 보관됩니다.</li>
+      <li>앱을 삭제하면 기기에 저장된 모든 데이터가 함께 삭제됩니다.</li>
+      <li>앱 내 <strong>설정 → 로그아웃</strong>을 통해 연결을 해제하고 캐시를 즉시 초기화할 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>필요 권한</h2>
+    <ul>
+      <li><strong>캘린더 읽기</strong> — 일정 분석을 위해 필요합니다.</li>
+      <li><strong>알림</strong> — 매일 아침 브리핑 알림 발송에 사용됩니다.</li>
+      <li><strong>인터넷</strong> — AI 브리핑 생성 및 Google 로그인에 필요합니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>아동 개인정보 보호</h2>
+    <p>
+      Lumen은 만 14세 미만 아동을 대상으로 하지 않습니다.
+      만 14세 미만 사용자의 개인정보를 의도적으로 수집하지 않습니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>방침 변경</h2>
+    <p>
+      개인정보처리방침이 변경될 경우 본 페이지를 통해 공지합니다.
+      중요한 변경이 있을 경우 앱 업데이트 노트를 통해 별도 안내합니다.
+    </p>
+  </section>
+
+  <div class="contact-box">
+    <h2>문의</h2>
+    <p>개인정보 관련 문의 및 삭제 요청은 아래로 연락 주세요.</p>
+    <p style="margin-top:12px;">
+      개발자: 최성식<br/>
+      이메일: <a href="mailto:remplir95@gmail.com">remplir95@gmail.com</a>
+    </p>
+  </div>
+</main>
+
+<footer>
+  © 2026 Lumen · 최성식 · 본 방침은 한국어를 기준으로 합니다.
+</footer>
+
+</body>
+</html>
