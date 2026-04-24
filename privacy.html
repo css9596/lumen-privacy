@@ -180,7 +180,7 @@
 </header>
 
 <main>
-  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 4월 18일</div>
+  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 4월 24일</div>
 
   <section>
     <h2>서비스 소개</h2>
@@ -210,7 +210,21 @@
         <strong>앱 설정</strong> — 알림 시간, 선택한 캘린더 목록 등.
         기기 로컬 저장소(SharedPreferences)에만 저장됩니다.
       </li>
+      <li>
+        <strong>앱 사용 통계 및 진단 정보</strong> — Google Firebase를 통해 다음 데이터가 수집됩니다.
+        앱 품질 개선 외 목적으로 사용되지 않으며, 캘린더 일정 제목·회고 본문·할 일 제목 등
+        <strong>식별 가능한 콘텐츠는 절대 포함되지 않습니다</strong>.
+        <ul style="margin-top:8px; padding-left:18px;">
+          <li>화면 전환·기능 사용 횟수, 카테고리·버킷 단위의 메타데이터 (Firebase Analytics)</li>
+          <li>앱 비정상 종료 시 크래시 스택트레이스, 디바이스 모델·OS 버전 (Firebase Crashlytics)</li>
+          <li>앱 시작 시간·네트워크 응답 속도 등 성능 지표 (Firebase Performance)</li>
+          <li>푸시 알림 수신용 디바이스 토큰 (Firebase Cloud Messaging)</li>
+        </ul>
+      </li>
     </ul>
+    <div class="highlight" style="margin-top:14px;">
+      <p>🚫 광고 식별자(AD_ID)는 수집하지 않으며, 매니페스트에서 명시적으로 차단되어 있습니다.</p>
+    </div>
   </section>
 
   <section>
@@ -241,27 +255,39 @@
         <strong>Google Calendar API</strong> (Google 캘린더 연결 시) —
         Google의 <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--primary);">개인정보처리방침</a>을 따릅니다.
       </li>
+      <li>
+        <strong>Google Firebase</strong> — 앱 품질 개선을 위한 사용 통계·크래시·성능 진단 및
+        푸시 알림 전달에 사용됩니다. 수집 항목은 위 "수집하는 정보" 섹션을 참고해 주세요.
+        Google의 <a href="https://firebase.google.com/support/privacy" target="_blank" style="color:var(--primary);">Firebase 개인정보처리방침</a>을 따릅니다.
+      </li>
     </ul>
     <p style="margin-top:12px;">
-      앱은 광고 SDK, 분석 SDK, 제3자 마케팅 서비스를 포함하지 않습니다.
+      앱은 광고 SDK 및 제3자 마케팅 서비스를 포함하지 않습니다.
     </p>
   </section>
 
   <section>
     <h2>데이터 보관 및 삭제</h2>
     <ul>
-      <li>모든 데이터는 기기 내 로컬 저장소에만 보관됩니다.</li>
+      <li>캘린더 데이터·앱 설정 등 사용자 콘텐츠는 기기 내 로컬 저장소에만 보관됩니다.</li>
       <li>앱을 삭제하면 기기에 저장된 모든 데이터가 함께 삭제됩니다.</li>
       <li>앱 내 <strong>설정 → 로그아웃</strong>을 통해 연결을 해제하고 캐시를 즉시 초기화할 수 있습니다.</li>
+      <li>
+        Firebase Analytics 사용 통계는 Google 정책에 따라 최대 14개월,
+        Crashlytics 크래시 로그는 90일 보관됩니다.
+        해당 데이터에 대한 삭제 요청은 아래 문의 이메일로 보내주시면 처리됩니다.
+      </li>
     </ul>
   </section>
 
   <section>
     <h2>필요 권한</h2>
     <ul>
-      <li><strong>캘린더 읽기</strong> — 일정 분석을 위해 필요합니다.</li>
-      <li><strong>알림</strong> — 매일 아침 브리핑 알림 발송에 사용됩니다.</li>
-      <li><strong>인터넷</strong> — AI 브리핑 생성 및 Google 로그인에 필요합니다.</li>
+      <li><strong>캘린더 읽기·쓰기</strong> — 일정 분석 및 사용자가 추가한 일정을 캘린더에 반영하기 위해 필요합니다.</li>
+      <li><strong>알림</strong> — 매일 아침 브리핑·체크리스트 리마인더·루틴 알림 발송에 사용됩니다.</li>
+      <li><strong>정확한 알람 (SCHEDULE_EXACT_ALARM)</strong> — 지정한 시각에 알림이 정확히 울리도록 사용됩니다.</li>
+      <li><strong>부팅 완료 (RECEIVE_BOOT_COMPLETED)</strong> — 기기 재부팅 후 예약된 알림을 다시 등록하기 위해 사용됩니다.</li>
+      <li><strong>인터넷</strong> — AI 브리핑 생성, Google 로그인, 푸시 알림 수신, Firebase 진단 데이터 전송에 필요합니다.</li>
     </ul>
   </section>
 
