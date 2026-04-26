@@ -199,15 +199,20 @@
     <p>앱은 아래 정보에 접근합니다.</p>
     <ul>
       <li>
-        <strong>캘린더 데이터</strong> — 일정 제목, 시작/종료 시간, 참석자 이메일 주소.
-        분석 목적으로만 사용되며 외부로 전송되지 않습니다.
+        <strong>캘린더 데이터</strong> — 일정 제목, 시작/종료 시간, 장소, 참석자 이메일 주소.
+        분석 및 AI 브리핑·체크리스트 생성에 사용됩니다 (전송 범위는 아래 "AI 전송 데이터" 항목 참고).
       </li>
       <li>
         <strong>Google 계정 정보</strong> (Google 캘린더 연결 시) — 이름, 이메일, 프로필 사진.
         화면에 표시하는 용도로만 사용됩니다.
       </li>
       <li>
-        <strong>앱 설정</strong> — 알림 시간, 선택한 캘린더 목록 등.
+        <strong>사용자 입력 콘텐츠</strong> — 체크리스트, 저녁 회고, 할 일, 매일 루틴.
+        모두 기기 로컬 저장소(SharedPreferences)에만 저장됩니다.
+        단, 저녁 회고 본문은 AI 응원 메시지 생성을 위해 Anthropic API로 전송됩니다 (아래 "AI 전송 데이터" 참고).
+      </li>
+      <li>
+        <strong>앱 설정 및 알림 이력</strong> — 알림 시간, 선택한 캘린더 목록, 최근 발송된 알림 기록 등.
         기기 로컬 저장소(SharedPreferences)에만 저장됩니다.
       </li>
       <li>
@@ -219,6 +224,7 @@
           <li>앱 비정상 종료 시 크래시 스택트레이스, 디바이스 모델·OS 버전 (Firebase Crashlytics)</li>
           <li>앱 시작 시간·네트워크 응답 속도 등 성능 지표 (Firebase Performance)</li>
           <li>푸시 알림 수신용 디바이스 토큰 (Firebase Cloud Messaging)</li>
+          <li>기능 플래그·AI 동작 설정값 다운로드 (Firebase Remote Config) — 데이터 전송 없이 수신만 합니다</li>
         </ul>
       </li>
     </ul>
@@ -233,12 +239,19 @@
       <li>오늘의 일정 요약 및 집중 시간 분석</li>
       <li>관계 인사이트 (오래 연락하지 못한 사람 안내)</li>
       <li>이번 주 업무·개인 시간 비율 계산</li>
-      <li>AI 브리핑 생성을 위한 Anthropic API 요청</li>
+      <li>이벤트별 맞춤 체크리스트 생성</li>
+      <li>저녁 회고에 대한 AI 응원 메시지 생성</li>
     </ul>
     <div class="highlight">
-      <p>
-        🤖 AI 브리핑 생성 시 일정 <strong>제목과 시간만</strong> Anthropic API로 전송됩니다.
-        참석자 이메일 등 개인 식별 정보는 전송되지 않습니다.
+      <p style="margin-bottom:8px;">🤖 <strong>AI 전송 데이터 (Anthropic API)</strong></p>
+      <ul style="padding-left:18px; margin:0;">
+        <li><strong>아침 브리핑</strong> — 오늘과 가까운 3일 이내 일정의 제목·시작시각, 자주 만나는 사람 이름·반복 방문 장소 등 분석된 패턴 메타데이터</li>
+        <li><strong>체크리스트 생성</strong> — 해당 일정의 제목·시작시각·장소, 사용자의 과거 패턴(인물·장소·자주 챙기는 항목)</li>
+        <li><strong>저녁 회고 응원</strong> — 사용자가 작성한 회고 본문, 오늘 일정의 제목, 루틴 완료 카운트</li>
+      </ul>
+      <p style="margin-top:10px; margin-bottom:0;">
+        Google 계정 이메일·프로필, 참석자 이메일 주소, 디바이스 식별자 등은 AI에 전송되지 않습니다.
+        Anthropic은 API 입력을 모델 학습에 사용하지 않습니다.
       </p>
     </div>
   </section>
@@ -247,8 +260,8 @@
     <h2>제3자 제공 및 외부 서비스</h2>
     <ul>
       <li>
-        <strong>Anthropic API</strong> — AI 브리핑 생성에 사용됩니다.
-        일정 제목·시간만 전송되며, Anthropic의
+        <strong>Anthropic API</strong> — AI 브리핑·체크리스트·저녁 회고 응원 생성에 사용됩니다.
+        전송되는 항목은 위 "AI 전송 데이터" 박스를 참고해 주세요. Anthropic의
         <a href="https://www.anthropic.com/privacy" target="_blank" style="color:var(--primary);">개인정보처리방침</a>을 따릅니다.
       </li>
       <li>
@@ -283,11 +296,11 @@
   <section>
     <h2>필요 권한</h2>
     <ul>
-      <li><strong>캘린더 읽기·쓰기</strong> — 일정 분석 및 사용자가 추가한 일정을 캘린더에 반영하기 위해 필요합니다.</li>
-      <li><strong>알림</strong> — 매일 아침 브리핑·체크리스트 리마인더·루틴 알림 발송에 사용됩니다.</li>
-      <li><strong>정확한 알람 (SCHEDULE_EXACT_ALARM)</strong> — 지정한 시각에 알림이 정확히 울리도록 사용됩니다.</li>
+      <li><strong>캘린더 읽기·쓰기 (READ_CALENDAR / WRITE_CALENDAR)</strong> — 일정 분석 및 사용자가 추가한 일정을 캘린더에 반영하기 위해 필요합니다.</li>
+      <li><strong>알림 (POST_NOTIFICATIONS)</strong> — 매일 아침 브리핑·체크리스트 리마인더·루틴 알림 발송에 사용됩니다.</li>
+      <li><strong>정확한 알람 (USE_EXACT_ALARM / SCHEDULE_EXACT_ALARM)</strong> — 지정한 시각에 알림이 정확히 울리도록 사용됩니다. Android 13 이상은 캘린더·리마인더 카테고리 앱에 자동 부여됩니다.</li>
       <li><strong>부팅 완료 (RECEIVE_BOOT_COMPLETED)</strong> — 기기 재부팅 후 예약된 알림을 다시 등록하기 위해 사용됩니다.</li>
-      <li><strong>인터넷</strong> — AI 브리핑 생성, Google 로그인, 푸시 알림 수신, Firebase 진단 데이터 전송에 필요합니다.</li>
+      <li><strong>인터넷 (INTERNET)</strong> — AI 브리핑 생성, Google 로그인, 푸시 알림 수신, Firebase 진단 데이터 전송에 필요합니다.</li>
     </ul>
   </section>
 
