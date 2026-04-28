@@ -180,7 +180,7 @@
 </header>
 
 <main>
-  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 4월 26일</div>
+  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 4월 29일</div>
 
   <section>
     <h2>서비스 소개</h2>
@@ -209,6 +209,13 @@
       <li>
         <strong>Google 계정 정보</strong> (Google 캘린더 연결 시) — 이름, 이메일, 프로필 사진.
         화면 표시 용도로만 사용됩니다.
+      </li>
+      <li>
+        <strong>네이버 캘린더 자격증명</strong> (네이버 캘린더 연결 시) — 사용자가 입력한 네이버 ID와
+        네이버에서 발급받은 <em>앱 비밀번호</em>(일반 로그인 비밀번호 아님).
+        Android Keystore 기반 보안 저장소(EncryptedSharedPreferences)에 암호화되어 기기에만 저장되며,
+        외부 서버로 전송하지 않습니다. 캘린더 데이터를 받아올 때만 네이버 CalDAV 서버에 직접 HTTPS로
+        전송되며, 설정 → 로그아웃 시 즉시 삭제됩니다.
       </li>
       <li>
         <strong>사용자 입력 콘텐츠</strong> — 할 일, 매일 루틴, 체크리스트 항목, 저녁 회고 본문.
@@ -282,6 +289,12 @@
         Google의 <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--primary);">개인정보처리방침</a>을 따릅니다.
       </li>
       <li>
+        <strong>네이버 CalDAV 서버</strong> (네이버 캘린더 연결 시) — 사용자가 직접 입력한
+        네이버 ID·앱 비밀번호로 네이버 캘린더 일정을 가져오기 위해 HTTPS로 직접 통신합니다.
+        제3자(Lumen 개발자 서버)를 거치지 않으며, 네이버 측 정책은
+        <a href="https://policies.naver.com/" target="_blank" style="color:var(--primary);">네이버 개인정보처리방침</a>을 따릅니다.
+      </li>
+      <li>
         <strong>Google Firebase</strong> (Crashlytics, Analytics, Cloud Messaging, Performance Monitoring,
         Remote Config) — 앱 안정성·운영을 위한 진단·메타데이터 전송에 사용됩니다.
         Firebase의
@@ -303,7 +316,7 @@
     <ul>
       <li>캘린더·할 일·루틴·체크리스트·회고 등 사용자 콘텐츠는 기기 내 로컬 저장소에만 보관됩니다.
         앱을 삭제하면 함께 삭제됩니다.</li>
-      <li>앱 내 <strong>설정 → 로그아웃</strong>으로 Google 연결을 해제하고 캐시·콘텐츠를 즉시 초기화할 수 있습니다.</li>
+      <li>앱 내 <strong>설정 → 로그아웃</strong>으로 Google·네이버 연결을 해제하고 저장된 자격증명·캐시·콘텐츠를 즉시 초기화할 수 있습니다.</li>
       <li>Firebase 진단 데이터(Crashlytics·Analytics·Performance·푸시 토큰)는 Google Firebase 서버에
         Google이 정한 보존 기간 동안 보관되며, 사용자가 앱을 삭제해도 자동 삭제되지는 않습니다.
         해당 데이터의 삭제를 원하시면 아래 문의 이메일로 요청해 주시면 가명 식별자 기준으로 삭제 처리합니다.</li>
