@@ -180,7 +180,7 @@
 </header>
 
 <main>
-  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 4월 29일</div>
+  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 5월 2일</div>
 
   <section>
     <h2>서비스 소개</h2>
@@ -224,6 +224,16 @@
       <li>
         <strong>앱 설정</strong> — 알림 시간, 선택한 캘린더 목록, 테마, 데모 모드 등. 기기 로컬에만 저장됩니다.
       </li>
+      <li>
+        <strong>친구 초대 코드</strong> — 본인 코드는 기기 식별자에서 derive된 6자리. 친구가 코드를 입력하면 양쪽에
+        Pro 1개월 보상이 부여됩니다. 보상 처리·중복 사용 차단을 위해 익명 uid·코드·redemption 시각이
+        Cloud Firestore에 저장됩니다 (실명·이메일·연락처 일절 포함되지 않음).
+      </li>
+      <li>
+        <strong>Pro 구독 결제 정보</strong> — Google Play Billing이 카드 정보를 직접 처리하며, Lumen은
+        결제 트랜잭션 결과(구매 영수증 토큰·구독 상품 ID·만료 시각)만 받습니다. 카드 번호·계좌
+        정보는 Lumen이 일절 보관하지 않습니다.
+      </li>
     </ul>
 
     <h3 style="margin-top:16px; font-size:15px; color:var(--text);">자동으로 수집되는 진단·운영 정보</h3>
@@ -247,6 +257,11 @@
         <strong>원격 설정</strong> (Firebase Remote Config) — AI 장애 시 자동 비활성화 등 운영 플래그를
         앱 재배포 없이 적용하기 위한 단방향 설정 수신.
       </li>
+      <li>
+        <strong>익명 인증 식별자</strong> (Firebase Authentication) — 친구 초대 보상 시스템에서 사용자를
+        구분하기 위한 자동 생성 익명 uid. 이메일·실명 일절 수집하지 않으며, 앱 데이터 클리어·재설치 시
+        새로 발급됩니다.
+      </li>
     </ul>
   </section>
 
@@ -254,10 +269,12 @@
     <h2>정보 사용 목적</h2>
     <ul>
       <li>오늘의 일정 요약, 집중 시간 분석, 이번 주 업무·개인 시간 비율 계산</li>
-      <li>일정 맥락에 맞는 AI 체크리스트·아침 브리핑·저녁 회고 응답 생성</li>
+      <li>일정 맥락에 맞는 AI 체크리스트·아침 브리핑·저녁 한 줄(회고) 응답 생성</li>
       <li>매일 루틴·체크리스트·아침 브리핑 등 로컬 알림 스케줄링</li>
       <li>충돌·오류·성능 문제의 원인 파악과 안정성 개선</li>
       <li>중요한 운영 공지 발송 및 AI 장애 시 즉시 대응</li>
+      <li>Pro 구독 결제 처리·만료 관리·복원 (Google Play Billing 영수증 검증)</li>
+      <li>친구 초대 보상 처리·중복 사용 방지·5명 cap 적용</li>
     </ul>
     <div class="highlight">
       <p>
@@ -296,9 +313,15 @@
       </li>
       <li>
         <strong>Google Firebase</strong> (Crashlytics, Analytics, Cloud Messaging, Performance Monitoring,
-        Remote Config) — 앱 안정성·운영을 위한 진단·메타데이터 전송에 사용됩니다.
+        Remote Config, Authentication 익명, Cloud Functions, Firestore) — 앱 안정성·운영·친구 초대 보상
+        처리를 위해 사용됩니다.
         Firebase의
         <a href="https://firebase.google.com/support/privacy" target="_blank" style="color:var(--primary);">개인정보 처리</a> 및
+        <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--primary);">Google 개인정보처리방침</a>을 따릅니다.
+      </li>
+      <li>
+        <strong>Google Play Billing</strong> — Pro 구독 결제 처리에 사용됩니다. 카드 정보는 Google이
+        직접 처리하며 Lumen에는 결제 결과(영수증 토큰·구독 상품 ID·만료 시각)만 전달됩니다.
         <a href="https://policies.google.com/privacy" target="_blank" style="color:var(--primary);">Google 개인정보처리방침</a>을 따릅니다.
       </li>
       <li>
@@ -314,12 +337,36 @@
   <section>
     <h2>데이터 보관 및 삭제</h2>
     <ul>
-      <li>캘린더·할 일·루틴·체크리스트·회고 등 사용자 콘텐츠는 기기 내 로컬 저장소에만 보관됩니다.
+      <li>캘린더·할 일·루틴·체크리스트·한 줄(회고) 등 사용자 콘텐츠는 기기 내 로컬 저장소에만 보관됩니다.
         앱을 삭제하면 함께 삭제됩니다.</li>
       <li>앱 내 <strong>설정 → 로그아웃</strong>으로 Google·네이버 연결을 해제하고 저장된 자격증명·캐시·콘텐츠를 즉시 초기화할 수 있습니다.</li>
       <li>Firebase 진단 데이터(Crashlytics·Analytics·Performance·푸시 토큰)는 Google Firebase 서버에
         Google이 정한 보존 기간 동안 보관되며, 사용자가 앱을 삭제해도 자동 삭제되지는 않습니다.
         해당 데이터의 삭제를 원하시면 아래 문의 이메일로 요청해 주시면 가명 식별자 기준으로 삭제 처리합니다.</li>
+      <li><strong>친구 초대 데이터</strong>(코드·redemption·익명 uid)는 Firestore에 보관되며 보상 처리·중복 사용
+        방지에 사용됩니다. 삭제 요청 시 익명 uid 기준으로 삭제 처리합니다.</li>
+      <li><strong>Pro 구독 정보</strong>(영수증 토큰·만료 시각·invitedCount)는 Firestore에 보관됩니다.
+        구독 취소·환불은 Google Play 계정에서 직접 가능하며, 만료 후 보존 기간이 지나면 자동 삭제됩니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Pro 구독 및 친구 초대 보상</h2>
+    <ul>
+      <li><strong>Pro 구독</strong> — 월 ₩4,900 또는 연 ₩39,000(33% 할인)으로 AI 무제한, 음성 한 줄,
+        한 달 돌아보기 등 추가 기능을 사용할 수 있습니다. 첫 결제 전 7일 무료 체험이 제공되며,
+        체험 기간 중 언제든 Google Play에서 취소할 수 있습니다.</li>
+      <li><strong>결제 처리 주체</strong> — 카드 정보·결제 트랜잭션은 Google Play Billing이 처리합니다.
+        Lumen은 결제 영수증 토큰·구독 상품 ID·만료 시각만 받으며, 카드 번호·계좌 정보는 일절 보관하지
+        않습니다.</li>
+      <li><strong>구독 취소·환불</strong> — Google Play 앱 → 결제 및 구독 → 구독에서 직접 취소·환불 신청할
+        수 있습니다.</li>
+      <li><strong>친구 초대 보상</strong> — 본인 코드를 친구가 입력하면 양쪽 모두 Pro 1개월 무료가
+        부여됩니다. 한 사용자가 최대 5명까지 보상받을 수 있습니다. 보상 처리·중복 사용 차단을 위해
+        익명 uid·코드·redemption 시각이 Cloud Firestore에 저장되며, 실명·이메일·연락처는 일절
+        포함되지 않습니다.</li>
+      <li><strong>이용 한도</strong> — 무료 사용자는 일 N회 AI 호출 한도가 적용될 수 있습니다(원격 설정으로
+        조정 가능). Pro 구독자는 한도 없이 사용할 수 있습니다.</li>
     </ul>
   </section>
 
