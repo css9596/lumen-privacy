@@ -180,7 +180,7 @@
 </header>
 
 <main>
-  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 5월 2일</div>
+  <div class="update-date">📅 시행일: 2026년 4월 18일 &nbsp;|&nbsp; 최종 수정: 2026년 5월 3일</div>
 
   <section>
     <h2>서비스 소개</h2>
@@ -234,6 +234,14 @@
         결제 트랜잭션 결과(구매 영수증 토큰·구독 상품 ID·만료 시각)만 받습니다. 카드 번호·계좌
         정보는 Lumen이 일절 보관하지 않습니다.
       </li>
+      <li>
+        <strong>위치 정보</strong> (날씨 기능 ON 시만) — 시·구 단위 대략적인 위치(Approximate location,
+        ACCESS_COARSE_LOCATION). 정확한 위치(GPS, FINE_LOCATION)는 사용하지 않습니다.
+        사용자가 설정 → "내 위치 날씨 보기"를 켰을 때만 수집되며, 좌표는 무료 공개 API
+        (Open-Meteo, BigDataCloud)로 전송되어 7일 날씨와 한국어 도시 이름을 받아옵니다.
+        좌표는 외부 서버에 저장되지 않으며 기기 내에 12시간 동안 캐시된 후 자동 갱신됩니다.
+        설정에서 토글을 끄면 즉시 수집·전송이 중단됩니다.
+      </li>
     </ul>
 
     <h3 style="margin-top:16px; font-size:15px; color:var(--text);">자동으로 수집되는 진단·운영 정보</h3>
@@ -275,6 +283,7 @@
       <li>중요한 운영 공지 발송 및 AI 장애 시 즉시 대응</li>
       <li>Pro 구독 결제 처리·만료 관리·복원 (Google Play Billing 영수증 검증)</li>
       <li>친구 초대 보상 처리·중복 사용 방지·5명 cap 적용</li>
+      <li>홈·캘린더·아침 브리핑에 오늘 날씨와 7일 예보를 한 줄로 표시 (선택 기능)</li>
     </ul>
     <div class="highlight">
       <p>
@@ -327,6 +336,16 @@
       <li>
         <strong>Google Play 서비스</strong> — 앱 내 업데이트 안내(in-app update)에 사용됩니다.
       </li>
+      <li>
+        <strong>Open-Meteo</strong> (날씨 기능 ON 시만) — 7일 날씨 예보를 받아오기 위해 좌표만 전송합니다.
+        무료 공개 API이며 사용자 식별 정보는 전송되지 않습니다.
+        <a href="https://open-meteo.com/en/terms" target="_blank" style="color:var(--primary);">Open-Meteo 이용약관</a>을 따릅니다.
+      </li>
+      <li>
+        <strong>BigDataCloud</strong> (날씨 기능 ON 시만) — 좌표를 한국어 도시 이름으로 변환하기 위해
+        좌표만 전송합니다. 무료 공개 API이며 사용자 식별 정보는 전송되지 않습니다.
+        <a href="https://www.bigdatacloud.com/privacy-and-cookie-policy" target="_blank" style="color:var(--primary);">BigDataCloud 개인정보처리방침</a>을 따릅니다.
+      </li>
     </ul>
     <p style="margin-top:12px;">
       앱은 광고 SDK 및 제3자 마케팅 서비스를 포함하지 않습니다.
@@ -347,6 +366,9 @@
         방지에 사용됩니다. 삭제 요청 시 익명 uid 기준으로 삭제 처리합니다.</li>
       <li><strong>Pro 구독 정보</strong>(영수증 토큰·만료 시각·invitedCount)는 Firestore에 보관됩니다.
         구독 취소·환불은 Google Play 계정에서 직접 가능하며, 만료 후 보존 기간이 지나면 자동 삭제됩니다.</li>
+      <li><strong>위치 좌표</strong>는 외부 서버에 저장되지 않고 기기 내 SharedPreferences에 12시간 동안만
+        캐시됩니다. 설정에서 날씨 토글을 끄거나 OS 위치 권한을 해제하면 즉시 새로 수집되지 않으며,
+        앱 삭제 시 함께 삭제됩니다.</li>
     </ul>
   </section>
 
@@ -379,6 +401,9 @@
         알림이 울리도록 사용됩니다. 캘린더·리마인더 카테고리 앱에 한해 자동 부여되는 권한입니다.</li>
       <li><strong>부팅 완료</strong> (RECEIVE_BOOT_COMPLETED) — 기기 재시작 후에도 예약 알림이 유지되도록 사용됩니다.</li>
       <li><strong>인터넷</strong> — AI 응답 생성, Google 로그인, Firebase 통신에 사용됩니다.</li>
+      <li><strong>대략적인 위치</strong> (ACCESS_COARSE_LOCATION) — 사용자가 설정에서 "내 위치 날씨 보기"를
+        켰을 때만 시·구 단위 위치를 사용하여 날씨 정보를 표시합니다. 정확한 위치(GPS)는 사용하지 않으며,
+        토글 OFF 또는 권한 거부 시 자동으로 동작이 비활성화됩니다.</li>
     </ul>
   </section>
 
